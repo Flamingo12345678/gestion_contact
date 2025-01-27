@@ -3,7 +3,6 @@
 #include <fstream>
 #include <string>
 #include <algorithm>
-#include <cctype>
 
 using namespace std;
 
@@ -44,6 +43,7 @@ void chargerContacts(vector<Contact> &contacts, const string &nomFichier)
     fichier.close();
   }
 }
+
 // Fonction pour sauvegarder les contacts dans un fichier
 void sauvegarderContacts(const vector<Contact> &contacts, const string &nomFichier)
 {
@@ -65,42 +65,15 @@ void ajouterContact(vector<Contact> &contacts)
   string nom, prenom, numero, email;
   cout << "Entrez le nom : ";
   cin >> nom;
-  cout << "Entrez le premier prénom : ";
+  cout << "Entrez le prénom : ";
   cin >> prenom;
-  prenom[0] = toupper(prenom[0]); // Mettre la première lettre en majuscule
-
-  string prenom2;
-  cout << "Entrez le deuxième prénom (appuyez sur Entrée si vous n'en avez pas) : ";
-  cin.ignore(); // Ignore the newline character left in the buffer
-  getline(cin, prenom2);
-  if (!prenom2.empty())
-  {
-    prenom2[0] = toupper(prenom2[0]); // Mettre la première lettre en majuscule
-    prenom += " " + prenom2;
-  }
-  cout << "Entrez le num�ro de t�l�phone (format: XX-XX-XX-XX-XX) : ";
+  cout << "Entrez le numéro de téléphone : ";
   cin >> numero;
-  bool emailValide = false;
-  do
-  {
-    cout << "Entrez l'e-mail : ";
-    cin >> email;
-
-    // Vérification basique de la validité de l'email
-    size_t atPos = email.find('@');
-    size_t dotPos = email.find('.', atPos);
-    if (atPos != string::npos && dotPos != string::npos && dotPos > atPos)
-    {
-      emailValide = true;
-    }
-    else
-    {
-      cout << "Adresse e-mail invalide. Veuillez réessayer." << endl;
-    }
-  } while (!emailValide);
+  cout << "Entrez l'e-mail : ";
+  cin >> email;
 
   contacts.emplace_back(nom, prenom, numero, email);
-  cout << "Contact ajout� avec succ�s !" << endl;
+  cout << "Contact ajouté avec succès !" << endl;
 }
 
 // Fonction pour afficher tous les contacts
@@ -108,7 +81,7 @@ void afficherContacts(const vector<Contact> &contacts)
 {
   if (contacts.empty())
   {
-    cout << "Aucun contact � afficher." << endl;
+    cout << "Aucun contact à afficher." << endl;
   }
   else
   {
@@ -119,25 +92,25 @@ void afficherContacts(const vector<Contact> &contacts)
   }
 }
 
-// Fonction pour mettre � jour un contact
+// Fonction pour mettre à jour un contact
 void mettreAJourContact(vector<Contact> &contacts)
 {
   string nom;
-  cout << "Entrez le nom du contact � mettre � jour : ";
+  cout << "Entrez le nom du contact à mettre à jour : ";
   cin >> nom;
 
   for (auto &contact : contacts)
   {
     if (contact.nom == nom)
     {
-      cout << "Entrez le nouveau pr�nom : ";
+      cout << "Entrez le nouveau prénom : ";
       cin >> contact.prenom;
-      cout << "Entrez le nouveau num�ro de t�l�phone : ";
+      cout << "Entrez le nouveau numéro de téléphone : ";
       cin >> contact.numeroTelephone;
       cout << "Entrez le nouvel e-mail : ";
       cin >> contact.email;
 
-      cout << "Contact mis � jour avec succ�s !" << endl;
+      cout << "Contact mis à jour avec succès !" << endl;
       return;
     }
   }
@@ -148,7 +121,7 @@ void mettreAJourContact(vector<Contact> &contacts)
 void supprimerContact(vector<Contact> &contacts)
 {
   string nom;
-  cout << "Entrez le nom du contact � supprimer : ";
+  cout << "Entrez le nom du contact à supprimer : ";
   cin >> nom;
 
   auto it = remove_if(contacts.begin(), contacts.end(),
@@ -160,7 +133,7 @@ void supprimerContact(vector<Contact> &contacts)
   if (it != contacts.end())
   {
     contacts.erase(it, contacts.end());
-    cout << "Contact supprim� avec succ�s !" << endl;
+    cout << "Contact supprimé avec succès !" << endl;
   }
   else
   {
@@ -168,13 +141,13 @@ void supprimerContact(vector<Contact> &contacts)
   }
 }
 
-// Fonction principale pour g�rer le menu
+// Fonction principale pour gérer le menu
 void afficherMenu()
 {
   cout << "\nMenu de Gestion des Contacts :\n";
   cout << "1. Ajouter un contact\n";
   cout << "2. Afficher les contacts\n";
-  cout << "3. Mettre � jour un contact\n";
+  cout << "3. Mettre à jour un contact\n";
   cout << "4. Supprimer un contact\n";
   cout << "5. Quitter\n";
   cout << "Quel est votre choix : ";
@@ -210,10 +183,10 @@ int main()
       break;
     case 5:
       sauvegarderContacts(contacts, nomFichier);
-      cout << "Contacts sauvegard�s. Au revoir !" << endl;
+      cout << "Contacts sauvegardés. Au revoir !" << endl;
       break;
     default:
-      cout << "Votre choix invalide. Veuillez r�essayer." << endl;
+      cout << "Choix invalide. Veuillez réessayer." << endl;
     }
   } while (choix != 5);
 
