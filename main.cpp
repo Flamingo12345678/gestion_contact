@@ -24,7 +24,7 @@ public:
   // Affichage des informations du contact
   void afficher() const
   {
-    cout << "Nom : " << nom
+    cout << ", Nom : " << nom
          << ", Prénom : " << prenom
          << ", Téléphone : " << numeroTelephone
          << ", E-mail : " << email
@@ -202,13 +202,14 @@ void afficherMenu()
   cout << "2. Afficher les contacts\n";
   cout << "3. Mettre � jour un contact\n";
   cout << "4. Supprimer un contact\n";
-  cout << "5. Sauvegarder et Quitter\n";
+  cout << "5. Charger les contacts\n";
+  cout << "6. Sauvegarder et Quitter\n";
   cout << "Quel est votre choix : ";
 }
 
 int main()
 {
-  vector<Contact> contacts; 
+  vector<Contact> contacts;
 
   // Charger les contacts depuis le fichier
   chargerContacts(contacts, "contacts.txt");
@@ -234,13 +235,18 @@ int main()
       supprimerContact(contacts);
       break;
     case 5:
+      chargerContacts(contacts, "contacts.txt");
+      cout << "Contacts chargés avec succès !" << endl;
+      break;
+    case 6:
       sauvegarderContacts(contacts, "contacts.txt");
       cout << "Contacts sauvegardés. Au revoir !" << endl;
       break;
     default:
       cout << "Choix invalide. Veuillez réessayer." << endl;
     }
-  } while (choix != 5);
+
+  } while (choix != 6);
 
   return 0;
 }
