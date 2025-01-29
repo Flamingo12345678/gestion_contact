@@ -1,0 +1,17 @@
+{
+  "files.associations": {
+    "*.sqlbook": "sql",
+    "*.ndjson": "jsonl",
+    "*.dbclient-js": "javascript",
+    "*.erd": "json",
+    "*.vuerd": "json",
+    "*.json.liquid": "json",
+    "*.yaml.liquid": "yaml",
+    "*.md.liquid": "markdown",
+    "*.js.liquid": "liquid-javascript",
+    "*.css.liquid": "liquid-css",
+    "*.scss.liquid": "liquid-scss",
+    "iosfwd": "cpp",
+    "iostream": "cpp"
+  }
+}
