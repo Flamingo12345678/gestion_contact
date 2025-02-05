@@ -36,7 +36,7 @@ public:
 // Fonction pour charger les contacts depuis un fichier
 void chargerContacts(vector<Contact> &contacts, const string &filename = "contacts.txt")
 {
-  ifstream fichier("contacts.txt");
+  ifstream fichier(filename);
   if (fichier.is_open())
   {
     string nom, prenom, numero, email, ville, pays;
@@ -50,7 +50,7 @@ void chargerContacts(vector<Contact> &contacts, const string &filename = "contac
 // Fonction pour sauvegarder les contacts dans un fichier
 void sauvegarderContacts(const vector<Contact> &contacts, const string &filename = "contacts.txt")
 {
-  ofstream fichier("conctacts.txt");
+  ofstream fichier(filename);
   if (fichier.is_open())
   {
     for (const auto &contact : contacts)
@@ -75,13 +75,15 @@ void ajouterContact(vector<Contact> &contacts)
 
   string prenom2;
   cout << "Entrez votre deuxième Prénom (appuyez sur Entrée si vous n'en avez pas) : ";
-  cin.ignore(); // Ignore the newline character left in the buffer
-  getline(cin, prenom2);
+  cin.ignore();          // Ignore the newline character left in the buffer
+  getline(cin, prenom2); // Permet de lire une ligne entière
   if (!prenom2.empty())
   {
     prenom2[0] = toupper(prenom2[0]); // Mettre la première lettre en majuscule
     prenom += " " + prenom2;
   }
+
+  // Vérification de la validité du numéro de téléphone
   bool numeroValide = false;
   do
   {
@@ -96,6 +98,8 @@ void ajouterContact(vector<Contact> &contacts)
       cout << "Numéro de téléphone invalide. Veuillez réessayer." << endl;
     }
   } while (!numeroValide);
+
+  // Vérification de la validité de l'email
   bool emailValide = false;
   do
   {
@@ -114,8 +118,10 @@ void ajouterContact(vector<Contact> &contacts)
       cout << "Adresse e-mail invalide. Veuillez réessayer." << endl;
     }
   } while (!emailValide);
+
   cout << "Entrez votre Ville : ";
   cin >> ville;
+
   cout << "Entrez votre Pays : ";
   cin >> pays;
 
@@ -152,14 +158,19 @@ void mettreAJourContact(vector<Contact> &contacts)
     {
       cout << "Entrez le nouveau Nom : ";
       cin >> contact.nom;
+
       cout << "Entrez le nouveau Pr�nom : ";
       cin >> contact.prenom;
+
       cout << "Entrez le nouveau Num�ro de T�l�phone : ";
       cin >> contact.numeroTelephone;
+
       cout << "Entrez le nouvel E-mail : ";
       cin >> contact.email;
+
       cout << "Entrez votre Ville : ";
       cin >> contact.ville;
+
       cout << "Entrez votre Pays : ";
       cin >> contact.pays;
 
@@ -174,6 +185,7 @@ void mettreAJourContact(vector<Contact> &contacts)
 void supprimerContact(vector<Contact> &contacts)
 {
   string nom;
+
   cout << "Entrez le Nom du contact � supprimer : ";
   cin >> nom;
 
