@@ -50,12 +50,53 @@ void ajouterContact(sqlite3 *db)
 
     cout << "Entrez votre Prénom : ";
     cin >> prenom;
+    prenom[0] = toupper(prenom[0]); // Mettre la première lettre en majuscule
 
-    cout << "Entrez votre Numéro de Téléphone : ";
-    cin >> numero;
+    string prenom2;
+    cout << "Entrez votre deuxième Prénom (appuyez sur Entrée si vous n'en avez pas) : ";
+    cin.ignore();          // Ignore the newline character left in the buffer
+    getline(cin, prenom2); // Permet de lire une ligne entière
+    if (!prenom2.empty())
+    {
+        prenom2[0] = toupper(prenom2[0]); // Mettre la première lettre en majuscule
+        prenom += " " + prenom2;
+    }
 
-    cout << "Entrez votre E-mail : ";
-    cin >> email;
+    // Vérification de la validité du numéro de téléphone
+    bool numeroValide = false;
+    do
+    {
+        cout << "Entrez votre Numéro de Téléphone (format: XX-XX-XX-XX-XX) : ";
+        cin >> numero;
+        if (numero.size() == 14 && numero[2] == '-' && numero[5] == '-' && numero[8] == '-' && numero[11] == '-')
+        {
+            numeroValide = true;
+        }
+        else
+        {
+            cout << "Numéro de téléphone invalide. Veuillez réessayer." << endl;
+        }
+    } while (!numeroValide);
+
+    // Vérification de la validité de l'email
+    bool emailValide = false;
+    do
+    {
+        cout << "Entrez votre E-mail : ";
+        cin >> email;
+
+        // Vérification basique de la validité de l'email
+        size_t atPos = email.find('@');
+        size_t dotPos = email.find('.', atPos);
+        if (atPos != string::npos && dotPos != string::npos && dotPos > atPos)
+        {
+            emailValide = true;
+        }
+        else
+        {
+            cout << "Adresse e-mail invalide. Veuillez réessayer." << endl;
+        }
+    } while (!emailValide);
 
     cout << "Entrez votre Ville : ";
     cin >> ville;
