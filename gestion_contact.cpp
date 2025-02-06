@@ -162,6 +162,7 @@ void afficherContacts(sqlite3 *db)
 }
 
 // Fonction pour mettre à jour un contact
+// Fonction pour mettre à jour un contact
 void mettreAJourContact(sqlite3 *db)
 {
     int id;
@@ -204,6 +205,17 @@ void mettreAJourContact(sqlite3 *db)
     cout << "Entrez le nouveau Pays (laisser vide pour conserver l'ancien) : ";
     getline(cin, pays);
 
+    // Demander à l'utilisateur s'il souhaite continuer ou annuler la mise à jour
+    char confirmation;
+    cout << "Souhaitez-vous continuer la mise à jour ? (O/N) : ";
+    cin >> confirmation;
+
+    if (toupper(confirmation) == 'N')
+    {
+        cout << "Mise à jour annulée." << endl;
+        return;
+    }
+
     // Préparer la requête de mise à jour
     string updateSQL = R"(
         UPDATE contacts
@@ -244,6 +256,7 @@ void mettreAJourContact(sqlite3 *db)
 
     sqlite3_finalize(stmt);
 }
+
 
 // Fonction pour supprimer un contact
 void supprimerContact(sqlite3 *db)
