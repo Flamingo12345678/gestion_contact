@@ -1,0 +1,12 @@
+[ODBC]
+DRIVER=ODBC Driver 17 for SQL Server
+Regional=Yes
+StatsLog_On=Yes
+QueryLog_On=Yes
+TrustServerCertificate=Yes
+Encrypt=Yes
+DATABASE=Gestion_Contact
+WSID=FLAMINGO
+APP=Microsoft® Windows® Operating System
+Trusted_Connection=Yes
+SERVER=FLAMINGO\SQLEXPRESS

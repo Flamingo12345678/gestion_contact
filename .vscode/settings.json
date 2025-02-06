@@ -13,5 +13,6 @@
     "*.scss.liquid": "liquid-scss",
     "iosfwd": "cpp",
     "iostream": "cpp"
-  }
+  },
+  "C_Cpp.errorSquiggles": "disabled"
 }
