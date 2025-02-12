@@ -4,8 +4,23 @@
 #include <string>
 #include <algorithm>
 #include <cctype>
+#include <sql lite3.h>
 
 using namespace std;
+
+//fonction pour initialiser la base de donnees
+sqlite3* initDatabase(const string& filename = "Gestion_Contact.db")
+{
+    sqlite3* db;
+    int rc = sqlite3_open(filename, &db);
+    if (rc)
+    {
+        cerr << "Erreur lors de l'ouverture de la base de données : " << sqlite3_errmsg(db) << endl;
+        sqlite3_close(db);
+        exit(1);
+    }
+    return db;
+}
 
 // Definition de la classe Contact
 class Contact
